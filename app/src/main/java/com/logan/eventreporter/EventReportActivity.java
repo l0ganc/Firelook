@@ -30,6 +30,7 @@ public class EventReportActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener mAuthListener;
 
     private String test;
+    private String test33;
 
 //    //auth
 //    mAuth = FirebaseAuth.getInstance();
