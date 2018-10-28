@@ -5,6 +5,37 @@ package com.logan.eventreporter;
  */
 
 public class Event {
+
+    private int like;
+    private String id;
+    private long time;
+    private String username;
+    private String imgUri;
+
+    /**
+     * All data for a event.
+     */
+
+    private String title;
+    private String address;
+    private String description;
+
+
+    public Event() {}
+
+
+    /**
+     * Constructor
+     */
+    public Event(String title, String address, String description) {
+        this.title = title;
+        this.address = address;
+        this.description = description;
+    }
+
+
+
+
     public void setTitle(String title) {
         this.title = title;
     }
@@ -55,34 +86,6 @@ public class Event {
 
     public void setImgUri(String imgUri) {
         this.imgUri = imgUri;
-    }
-
-    /**
-     * All data for a event.
-     */
-
-    private String title;
-    private String address;
-    private String description;
-
-
-
-    private int like;
-    private String id;
-    private long time;
-    private String username;
-    private String imgUri;
-
-    public Event() {}
-
-
-    /**
-     * Constructor
-     */
-    public Event(String title, String address, String description) {
-        this.title = title;
-        this.address = address;
-        this.description = description;
     }
 
     /**

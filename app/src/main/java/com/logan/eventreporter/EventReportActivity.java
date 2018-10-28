@@ -1,5 +1,7 @@
 package com.logan.eventreporter;
 
+import android.app.Activity;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +19,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class EventReportActivity extends AppCompatActivity {
     private static final String TAG = EventReportActivity.class.getSimpleName();
     private EditText mEditTextLocation;
@@ -26,11 +31,13 @@ public class EventReportActivity extends AppCompatActivity {
     private ImageView mImageViewCamera;
     private DatabaseReference database;
 
+    private LocationTracker mLocationTracker;
+    private Activity mActivity;
+
+
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
-    private String test;
-    private String test33;
 
 //    //auth
 //    mAuth = FirebaseAuth.getInstance();
@@ -57,11 +64,40 @@ public class EventReportActivity extends AppCompatActivity {
 //    });
 
 
+    // check if GPS enabled
+    mActivity = this;
+    mLocationTracker = new LocationTracker(mActivity);
+    mLocationTracker.getLocation();
+    final double latitude = mLocationTracker.getLatitude();
+    final double longitude = mLocationTracker.getLongitude();
+
+    new AsyncTask<Void, Void, Void>() {
+        private List<String> mAddressList = new ArrayList<String>();
+
+        @Override
+        protected Void doInBackground(Void... urls) {
+            mAddressList = mLocationTracker.getCurrentLocationViaJSON(latitude,longitude);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void input) {
+            if (mAddressList.size() >= 3) {
+                mEditTextLocation.setText(mAddressList.get(0) + ", " + mAddressList.get(1) +
+                        ", " + mAddressList.get(2) + ", " + mAddressList.get(3));
+            }
+        }
+    }.execute();
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_report);
+
+
         mEditTextLocation = (EditText) findViewById(R.id.edit_text_event_location);
         mEditTextTitle = (EditText) findViewById(R.id.edit_text_event_title);
         mEditTextContent = (EditText) findViewById(R.id.edit_text_event_content);
@@ -118,7 +154,7 @@ public class EventReportActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        mAuth.addAuthStateListener(mAuthListener);
+       // mAuth.addAuthStateListener(mAuthListener);
     }
 
     @Override
@@ -128,6 +164,10 @@ public class EventReportActivity extends AppCompatActivity {
             mAuth.removeAuthStateListener(mAuthListener);
         }
     }
+
+
+
+
 
 
 }
