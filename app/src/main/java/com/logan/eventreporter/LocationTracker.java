@@ -3,13 +3,14 @@ package com.logan.eventreporter;
 import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.location.Location;
+
+
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
-
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -31,7 +32,7 @@ import static android.content.Context.LOCATION_SERVICE;
  * Created by logan on 10/28/18.
  */
 
-public class LocationTracker implements LocationListener{
+public class LocationTracker implements LocationListener {
     private final Activity mContext;
     private static final int PERMISSIONS_REQUEST_LOCATION = 99;
     private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10;
@@ -87,6 +88,7 @@ public class LocationTracker implements LocationListener{
                     }
                 }
                 // if GPS Enabled get lat/long using GPS Services
+
                 if (mIsGPSEnabled) {
                     if (location == null) {
                         locationManager.requestLocationUpdates(
