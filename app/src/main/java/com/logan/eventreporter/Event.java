@@ -20,6 +20,7 @@ public class Event {
     private String address;
     private String description;
 
+    private int CommentNumber;
 
     public Event() {}
 
@@ -95,4 +96,11 @@ public class Event {
     public String getAddress() { return this.address; }
     public String getDescription() { return this.description; }
 
+    public int getCommentNumber() {
+        return CommentNumber;
+    }
+
+    public void setCommentNumber(int commentNumber) {
+        CommentNumber = commentNumber;
+    }
 }
