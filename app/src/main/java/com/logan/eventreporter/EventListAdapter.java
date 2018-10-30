@@ -24,7 +24,7 @@ import java.util.Map;
  * Created by logan on 10/29/18.
  */
 
-public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.ViewHolder> {
+public class EventListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<Event> eventList;
 
     private Context context;
@@ -89,40 +89,32 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.View
         }
     }
 
-    @Override
-    public int getItemViewType(int position) {
-        return map.containsKey(position) ? TYPE_ADS : TYPE_ITEM;
-    }
-
-
-
     public class ViewHolderAds extends RecyclerView.ViewHolder {
         public ViewHolderAds(View v) {
             super(v);
         }
     }
 
-
-
+    @Override
+    public int getItemViewType(int position) {
+        return map.containsKey(position) ? TYPE_ADS : TYPE_ITEM;
+    }
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(final ViewHolder holder, final int position) {
-        @Override
-        public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
-            switch (holder.getItemViewType()) {
-                case TYPE_ITEM:
-                    ViewHolder viewHolderItem = (ViewHolder) holder;
-                    configureItemView(viewHolderItem, position);
-                    break;
-                case TYPE_ADS:
-                    ViewHolderAds viewHolderAds = (ViewHolderAds) holder;
-                    configureAdsView(viewHolderAds, position);
-                    break;
-            }
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
+        switch (holder.getItemViewType()) {
+            case TYPE_ITEM:
+                ViewHolder viewHolderItem = (ViewHolder) holder;
+                configureItemView(viewHolderItem, position);
+                break;
+            case TYPE_ADS:
+                ViewHolderAds viewHolderAds = (ViewHolderAds) holder;
+                configureAdsView(viewHolderAds, position);
+                break;
         }
-
     }
+
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override
