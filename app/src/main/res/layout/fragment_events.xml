@@ -33,5 +33,13 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="15dp" />
         </RelativeLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/event_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical" />
+
+
     </LinearLayout>
 </FrameLayout>
